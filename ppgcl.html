@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Analyzer AI</title>
+    <style>
+        /* Base Dark Theme */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #000000; /* Pure black */
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        /* The Intro Popup (Modal) */
+        #welcome-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 450px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .modal-content h1 {
+            color: #1DB954; /* Spotify-style green */
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .start-btn {
+            background: #1DB954;
+            color: black;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Chat Container (Full Screen) */
+        #chat-interface {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-modal">
+        <div class="modal-content">
+            <h1>Mi-fi.AI</h1>
+            <p>Welcome! This site analyzes your music taste, explores your favorite genres, and provides personalized recommendations based on your unique vibe.</p>
+            <button class="start-btn" onclick="closeModal()">Start Analyzing</button>
+        </div>
+    </div>
+
+    <div id="chat-interface">
+        <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: #444;">
+            <p>The Chatbase AI will appear here once you paste your script.</p>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            document.getElementById('welcome-modal').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
