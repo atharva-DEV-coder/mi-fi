@@ -3,74 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi-fi.AI | Music Analyzer</title>
+    <title>Plexove.ai | AI Music Intelligence</title>
     <style>
-        /* Base Dark Theme */
+        /* Modern Aesthetic Overhaul */
+        :root {
+            --primary-accent: #3a86ff; /* Electric Blue */
+            --bg-dark: #050505;
+            --card-bg: rgba(25, 25, 25, 0.8);
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            background-color: #000000; /* Pure black */
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden; /* Prevents double scrollbars */
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            overflow: hidden;
         }
 
-        /* The Intro Popup (Modal) */
+        /* The Intro Popup (Glassmorphism Effect) */
         #welcome-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: radial-gradient(circle at center, rgba(58, 134, 255, 0.15) 0%, rgba(0,0,0,0.98) 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
         }
 
         .modal-content {
-            background: #1a1a1a;
-            padding: 40px;
-            border-radius: 20px;
+            background: var(--card-bg);
+            padding: 50px 40px;
+            border-radius: 24px;
             text-align: center;
-            max-width: 450px;
-            border: 1px solid #333;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            max-width: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        /* Logo Placeholder Styling */
+        .brand-logo {
+            width: 80px; /* Adjust size as needed */
+            height: 80px;
+            margin-bottom: 20px;
+            object-fit: contain;
+            /* Remove filter if your logo is already colored */
+            filter: drop-shadow(0 0 10px var(--primary-accent)); 
         }
 
         .modal-content h1 {
-            color: #1DB954; /* Spotify-style green */
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            font-size: 2.2rem;
+            text-transform: lowercase; /* Modern AI brand look */
+        }
+
+        .modal-content h1 span {
+            color: var(--primary-accent);
         }
 
         .modal-content p {
-            color: #ccc;
+            color: var(--text-dim);
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 35px;
+            font-size: 1.05rem;
         }
 
         .start-btn {
-            background: #1DB954;
-            color: black;
+            background: var(--primary-accent);
+            color: white;
             border: none;
-            padding: 14px 35px;
-            border-radius: 30px;
-            font-weight: bold;
+            padding: 16px 45px;
+            border-radius: 12px;
+            font-weight: 600;
             cursor: pointer;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(58, 134, 255, 0.3);
         }
 
         .start-btn:hover {
-            transform: scale(1.05);
-            background: #1ed760;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(58, 134, 255, 0.5);
+            background: #5094ff;
         }
 
-        /* Chat Container - Fixed to fill screen */
+        /* Chat Container */
         #chat-interface {
             width: 100%;
             height: 100vh;
@@ -88,8 +116,10 @@
 
     <div id="welcome-modal">
         <div class="modal-content">
-            <h1>MI-FI.AI</h1>
-            <p>Proudly Developed in India.<br><br>Analyze your music taste, explore genres, and get recommendations based on your unique vibe.</p>
+            <img src="YOUR_LOGO_URL_HERE" alt="Plexove Logo" class="brand-logo">
+            
+            <h1>plexove<span>.ai</span></h1>
+            <p>Experience the next generation of music intelligence. Analyze your vibe and discover your sound, engineered in India.</p>
             <button class="start-btn" onclick="closeModal()">Start Analyzing</button>
         </div>
     </div>
@@ -97,17 +127,20 @@
     <div id="chat-interface">
         <iframe
             src="https://www.chatbase.co/chatbot-iframe/Ccfl1drfY8xSxImHPctSu"
-            title="mi-fi.ai"
+            title="plexove.ai"
             frameborder="0"
         ></iframe>
     </div>
 
     <script>
         function closeModal() {
-            // Hide the modal
-            document.getElementById('welcome-modal').style.display = 'none';
-            // Allow scrolling if the chat content is long
-            document.body.style.overflow = 'auto';
+            const modal = document.getElementById('welcome-modal');
+            modal.style.transition = 'opacity 0.5s ease';
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 500);
         }
     </script>
 
