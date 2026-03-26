@@ -3,109 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plexove.ai | AI Music Intelligence</title>
+    <title>Plexove.ai | Music Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Modern Aesthetic Overhaul */
         :root {
-            --primary-accent: #3a86ff; /* Electric Blue */
-            --bg-dark: #050505;
-            --card-bg: rgba(25, 25, 25, 0.8);
-            --text-main: #ffffff;
-            --text-dim: #a0a0a0;
+            --accent-glow: #3a86ff;
+            --deep-space: #030303;
+            --glass-panel: rgba(18, 18, 18, 0.75);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --font-primary: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            height: 100vh;
+            background-color: var(--deep-space);
+            color: #ffffff;
+            font-family: var(--font-primary);
             overflow: hidden;
         }
 
-        /* The Intro Popup (Glassmorphism Effect) */
-        #welcome-modal {
+        /* Unique Entrance Overlay */
+        #gateway-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(58, 134, 255, 0.15) 0%, rgba(0,0,0,0.98) 100%);
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(58, 134, 255, 0.1) 0%, #000 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
+            z-index: 9999;
+            backdrop-filter: blur(12px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .modal-content {
-            background: var(--card-bg);
-            padding: 50px 40px;
-            border-radius: 24px;
+        .portal-card {
+            background: var(--glass-panel);
+            padding: 3rem 2rem;
+            border-radius: 32px;
             text-align: center;
-            max-width: 420px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 440px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* Logo Placeholder Styling */
-        .brand-logo {
-            width: 80px; /* Adjust size as needed */
-            height: 80px;
-            margin-bottom: 20px;
-            object-fit: contain;
-            /* Remove filter if your logo is already colored */
-            filter: drop-shadow(0 0 10px var(--primary-accent)); 
+        .brand-identity {
+            width: auto;
+            height: 90px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 15px rgba(58, 134, 255, 0.4));
         }
 
-        .modal-content h1 {
-            color: var(--text-main);
-            margin-bottom: 15px;
+        .hero-text {
+            font-size: 2.5rem;
             font-weight: 800;
-            letter-spacing: -1px;
-            font-size: 2.2rem;
-            text-transform: lowercase; /* Modern AI brand look */
+            margin: 0 0 1rem 0;
+            letter-spacing: -1.5px;
+            background: linear-gradient(to right, #fff, var(--accent-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .modal-content h1 span {
-            color: var(--primary-accent);
-        }
-
-        .modal-content p {
-            color: var(--text-dim);
+        .sub-text {
+            color: #888;
             line-height: 1.6;
-            margin-bottom: 35px;
-            font-size: 1.05rem;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 300;
         }
 
-        .start-btn {
-            background: var(--primary-accent);
-            color: white;
+        .action-trigger {
+            background: #fff;
+            color: #000;
             border: none;
-            padding: 16px 45px;
-            border-radius: 12px;
+            padding: 1.2rem 3rem;
+            border-radius: 100px;
             font-weight: 600;
             cursor: pointer;
             font-size: 1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(58, 134, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .start-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(58, 134, 255, 0.5);
-            background: #5094ff;
+        .action-trigger:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+            background: var(--accent-glow);
+            color: #fff;
         }
 
-        /* Chat Container */
-        #chat-interface {
+        /* Main Interface */
+        #main-view {
             width: 100%;
             height: 100vh;
-            display: block;
+            opacity: 0;
+            transition: opacity 1s ease;
         }
 
-        iframe {
+        .chat-frame {
             border: none;
             width: 100%;
             height: 100%;
@@ -114,33 +118,40 @@
 </head>
 <body>
 
-    <div id="welcome-modal">
-        <div class="modal-content">
-            <img src="YOUR_LOGO_URL_HERE" alt="Plexove Logo" class="brand-logo">
+    <section id="gateway-overlay">
+        <div class="portal-card">
+            <img src="Sophisticated%20AI%20Logo%20with%20Angular%20Elements.png" 
+                 alt="Plexove" 
+                 class="brand-identity">
             
-            <h1>plexove<span>.ai</span></h1>
-            <p>Experience the next generation of music intelligence. Analyze your vibe and discover your sound, engineered in India.</p>
-            <button class="start-btn" onclick="closeModal()">Start Analyzing</button>
+            <h1 class="hero-text">plexove.ai</h1>
+            <p class="sub-text">Architecting the future of sound. High-fidelity music intelligence, engineered in India.</p>
+            
+            <button class="action-trigger" onclick="unlockExperience()">Launch Engine</button>
         </div>
-    </div>
+    </section>
 
-    <div id="chat-interface">
+    <main id="main-view">
         <iframe
             src="https://www.chatbase.co/chatbot-iframe/Ccfl1drfY8xSxImHPctSu"
-            title="plexove.ai"
-            frameborder="0"
+            class="chat-frame"
+            title="Plexove Intelligence"
         ></iframe>
-    </div>
+    </main>
 
     <script>
-        function closeModal() {
-            const modal = document.getElementById('welcome-modal');
-            modal.style.transition = 'opacity 0.5s ease';
-            modal.style.opacity = '0';
+        function unlockExperience() {
+            const overlay = document.getElementById('gateway-overlay');
+            const main = document.getElementById('main-view');
+            
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none';
+            
             setTimeout(() => {
-                modal.style.display = 'none';
+                overlay.style.display = 'none';
+                main.style.opacity = '1';
                 document.body.style.overflow = 'auto';
-            }, 500);
+            }, 700);
         }
     </script>
 
